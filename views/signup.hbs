@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - Sign up</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/signup.css" rel="stylesheet">
+</head>
+<body>
+    <video autoplay loop muted id="bgvid">
+        <source src="nike.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+
+        <header class="page-header">
+            <h1>Registration</h1>
+        </header>
+
+        <!-- Registration form - START -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="jumbotron" id="signup">
+                        <form name="registration-form" method="POST" action="{{singup}}" onsubmit="return validatePasswords();">
+                            <div class="form-group">
+                                <label for="InputName">Username</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="usernameID" name="username" placeholder="Username" required>
+                                    <span class="input-group-addon"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputEmail">Email</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="emailID" name="email" placeholder="Email" required>
+                                    <span class="input-group-addon"></span>
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label for="InputPassword">Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="passwordID" name="password" placeholder="Password" required>
+                                    <span class="input-group-addon"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="InputPassword">Confirm Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmPasswordID" name="confirmPassword" placeholder="Password" required>
+                                    <span class="input-group-addon"></span>
+                                </div>
+                            </div>
+                            {{#if error}}
+                                <div id="error" class="alert alert-danger">
+                                    <span class="glyphicon glyphicon-remove"></span><strong> Error! {{error}}</strong>
+                                </div>
+                            {{/if}}
+                            <div id="error-password" class="alert alert-danger hidden">
+                                <span class="glyphicon glyphicon-remove"></span><strong> Error! Passwords do not match!</strong>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-push-1">
+                    <h1>Football Stats</h1>
+                    </br>
+                    <h3>Consult league statics</h3>
+                    </br>
+                    <h3>Make groups of teams for a quicker search on your favorite teams results</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Registration form - END -->
+    </div>
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/client/validate-passwords.js"></script>
+</body>
+</html>

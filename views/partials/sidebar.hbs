@@ -1,0 +1,9 @@
+<a id="menu-toggle" class="btn btn-dark btn-sm toggle"><i class="glyphicon glyphicon-menu-left"></i></a>
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand" onclick=$("#menu-toggle").click();>Leagues</li>
+        {{#each leagues}}
+            <li><a href="{{leagueLink _links.self.href}}" onclick=$("#menu-toggle").click();>{{caption}}</a></li>
+        {{/each}}
+    </ul>
+</div>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - Players</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/team_players.css" rel="stylesheet">
+</head>
+<body>
+    {{> navbar}}
+
+    <div id="wrapper">
+        {{> sidebar}}
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container">
+                <h2 class="sub-header">Players</h2>
+	            <div class="jumbotron">
+                    <div class="table-responsive">
+                        <table class="table table">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Birthday</th>
+                                    <th>Nationality</th>
+                                    <th>Market Value</th>
+                                    <th>Contract</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each players}}
+                                <tr>
+                                    <td>{{jerseyNumber}}</td>
+                                    <td>{{name}}</td>
+                                    <td>{{position}}</td>
+                                    <td>{{dateOfBirth}}</td>
+                                    <td>{{nationality}}</td>
+                                    <td>{{marketValue}}</td>
+                                    <td>{{contractUntil}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+	            </div>
+            </div> <!-- /container -->
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>

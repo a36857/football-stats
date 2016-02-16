@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - {{league}}</title>
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/league.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{home}}">
+                <i class="ion-ios-football"></i>
+                Football Stats
+            </a>
+        </div>
+		<div class="navbar-collapse collapse" id="navbar-collapsible">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#about">About</a></li>
+                <li><a href="#fixtures">Fixtures</a></li>
+				{{#if standing}}
+					<li><a href="#leaguetable">Table</a></li>
+				{{/if}}
+            </ul>
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-star"></i> Groups <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {{#each userGroups}}
+                            <li><a href="{{groupDetailsLink _id}}">{{name}}</a></li>
+                        {{/each}}
+                        <li class="divider"></li>
+                        <li><a href="{{groupsLink}}"><i class="glyphicon glyphicon-plus"></i> Add Group</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{username}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{profileLink}}"><i class=""></i> Profile</a></li>
+                        <li><a href="{{profileSettingsLink}}"><i class=""></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{logout}}"><i class="glyphicon glyphicon-off"></i> Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+		</div>
+    </nav>
+
+	<!-- Sidebar -->
+    <div id="sidebar-wrapper">
+		<span id="menu-toggle">
+			<a class="btn btn-white btn-sm toggle">
+				<i class="glyphicon glyphicon-menu-left"></i>
+			</a>
+		</span>
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand" onclick=$("#menu-toggle").click();>Leagues</li>
+			{{#each leagues}}
+				<li><a href="{{leagueLink _links.self.href}}" onclick=$("#menu-toggle").click();>{{caption}}</a></li>
+			{{/each}}
+		</ul>
+    </div>
+	
+    <!-- Header -->
+    <header id="top" class="header">
+		<div class="text-vertical-center">
+			<div class="container theme-showcase">
+				<h1 class="page-header">{{caption}}</h1>
+				<br/>			
+				<div class="row row-centered">
+					{{#if standing}}
+						<div class="col-md-4 placeholder">
+							<a href="#about">
+								<img src="http://cdn.c.photoshelter.com/img-get2/I0000V_3iFnDb3ak/fit=/fill=200x200/g=G0000IgnOz.fHP0M/I0000V_3iFnDb3ak.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							</a>
+							<h4>About</h4>
+						</div>
+						<div class="col-md-4 placeholder">
+							<a href="#fixtures">
+								<img src="http://static.ddmcdn.com/gif/recipes/pro-soccer-players-have-sharper-mental-skills-200x200-130304.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							</a>
+							<h4>Fixtures</h4>
+						</div>
+						<div class="col-md-4 placeholder">
+							<a href="#leaguetable">
+								<img src="http://static.classora.com/files/uploads/images/rankings/1280/main.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							</a>
+							<h4>League Table</h4>
+						</div>
+					{{else}}
+						<div class="col-md-6 placeholder">
+							<a href="#about">
+								<img src="http://cdn.c.photoshelter.com/img-get2/I0000V_3iFnDb3ak/fit=/fill=200x200/g=G0000IgnOz.fHP0M/I0000V_3iFnDb3ak.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							</a>
+							<h4>About</h4>
+						</div>
+						<div class="col-md-6 placeholder">
+							<a href="#fixtures">
+								<img src="http://static.ddmcdn.com/gif/recipes/pro-soccer-players-have-sharper-mental-skills-200x200-130304.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							</a>
+							<h4>Fixtures</h4>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+    </header>
+
+	
+    <!-- About -->
+    <section id="about" class="about">
+		<hr class="featurette-divider"/>
+        <div class="container">
+			<div class="row featurette">
+				<div class="col-md-7">
+					<h2 class="featurette-heading">{{caption}}</h2>
+					<br/>
+					<p class="lead">
+						The league {{caption}} take place along the year in a total number of {{numberOfGames}} games.
+						It's composed by {{numberOfTeams}} teams that play against one another.
+						At this moment, the league is at the {{currentMatchday}} round. 
+					</p>
+				</div>
+				<div class="col-md-5">
+					<img class="featurette-image img-fluid center-block" width="500" height="500" src="http://blog.dictionary.com/wp-content/uploads/2015/06/soccer.jpg" alt="Generic placeholder image">
+				</div>
+			</div>
+        </div>
+		<hr class="featurette-divider"/>
+    </section>
+	<!-- About -->
+
+	<!-- Fixtures -->
+    <section id="fixtures" class="fixtures">
+		<br/>
+        <div class="container">
+			<h2 class="sub-header">Fixtures<a href="{{leagueFixturesLink leagueID}}" class="full-info"> + </a></h2>
+			<div class="row featurette">
+				<div class="table-responsive">
+					<table class="table table-striped" id="tableFix">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Home Team</th>
+								<th>Result</th>
+								<th>Away Team</th>
+							</tr>
+						</thead>
+						<tbody>
+						{{#each fixtures}}
+							<tr>
+								<td>{{dateHelper date}}</td>
+								<td><a href="{{teamLink _links.homeTeam.href}}" class=".fixture">{{homeTeamName}}</a></td>
+								<td>{{result.goalsHomeTeam}} - {{result.goalsAwayTeam}}</td>
+								<td><a href="{{teamLink _links.awayTeam.href}}" class=".fixture">{{awayTeamName}}</a></td>
+							</tr>
+						{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br/>
+    </section>
+	<!-- Fixtures -->
+	
+	<!-- Call to Action -->
+    <aside class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Match {{currentMatchday}}</h3>
+                </div>
+            </div>
+        </div>
+    </aside>
+	
+	<hr class="featurette-divider"/>
+	
+{{#if standing}}
+	<section id="leaguetable" class="leaguetable">
+		<div class="container">
+			<h2 class="sub-header">League Table<a href="{{leaguetableLink leagueID}}" class="full-info"> +</a></h2>
+			<div class="table-responsive">
+				<table class="table table">
+					<thead>
+						<tr>
+							<th>#</th>
+                            <th/>
+							<th>TEAM</th>
+							<th>PTS</th>
+							<th>M</th>
+							<th>W</th>
+							<th>D</th>
+							<th>L</th>
+							<th>G</th>
+							<th>GA</th>
+							<th>GD</th>
+						</tr>
+					</thead>
+					<tbody>
+					{{#each standing}}
+						<tr>
+							<td>{{position}}</td>
+                            <td><img width="20" height="20" src="{{crestURI}}"></td>
+							<td><a href="{{teamLink _links.team.href}}" class="team-href">{{teamName}}</a></td>
+							<td>{{points}}</td>
+							<td>{{playedGames}}</td>
+							<td>{{wins}}</td>
+							<td>{{draws}}</td>
+							<td>{{losses}}</td>
+							<td>{{goals}}</td>
+							<td>{{goalsAgainst}}</td>
+							<td>{{goalDifference}}</td>
+						</tr>
+					{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>	
+{{/if}}
+
+	<footer>
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+					<h5>Football Stats - Season {{seasonHelper caption}}</h5>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<span id="top-link-block" class="hidden">
+		<a href="#top" class="btn btn-white btn-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+			<i class="glyphicon glyphicon-chevron-up"></i>
+		</a>
+	</span><!-- /top-link-block -->
+
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script src="/js/customs/menu-toggle.js"></script>
+    <script>
+		// Only enable if the document has a long scroll bar
+		// Note the window height + offset
+		if ( ($(window).height() + 100) < $(document).height() ) {
+			$('#top-link-block').removeClass('hidden').affix({
+				// how far to scroll down before link "slides" into view
+				offset: {top:100}
+			});
+		}
+		
+		// Scrolls to the selected menu item on the page
+		$(document).ready(function() {
+			$('a[href*=#]:not([href=#])').click(function() {
+				if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+					var target = $(this.hash);
+					target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+					if (target.length) {
+						$('html,body').animate({
+							scrollTop: target.offset().top-50
+						}, 1000);
+						return false;
+					}
+				}
+			});
+		});
+    </script>
+</body>
+</html>

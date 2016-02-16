@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - {{name}} Group</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/group_details.css" rel="stylesheet">
+</head>
+<body>
+    {{> navbar}}
+
+    <div id="wrapper">
+        {{> sidebar}}
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container marketing">
+                <div class="jumbotron">
+                    <div class="row featurette">
+                        <div class="col-md-4">
+                            <h2 class="featurette-heading">{{name}}</h2>
+                            {{#each teams}}
+                                <div class="container-fluid" id="t{{teamID}}">
+                                    <form class="delete-team-form" method="" action="{{groupTeamLink teamID ../groupID}}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="team" value="t{{teamID}}">
+                                        <div class="form-inline">
+                                            <button id="btn-delete-team" type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
+                                            <span>{{teamName}}</span>
+                                        </div>
+                                    </form>
+                                    <form method="GET" action="{{groupTeamLink teamID ../groupID}}">
+                                        <div class="form-inline">
+                                            <input type="number" min="1" name="n" class="form-control" placeholder="Number Of Fixtures" required />
+                                            <button type="submit" class="btn btn-success pull-right"><i class="glyphicon glyphicon-ok"></i></button>
+                                        </div>
+                                        <br/>
+                                    </form>
+                                    <br/>
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-4 pull-right">
+                            <form method="POST" action="{{groupDetailsLink groupID}}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-primary btn-lg pull-right">Delete Group</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /.jumbotron -->
+            </div><!-- /.container -->
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script src="/js/client/group-delete.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>

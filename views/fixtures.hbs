@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - Fixtures</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/fixtures.css" rel="stylesheet">
+</head>
+<body>
+    {{> navbar}}
+
+    <div id="wrapper">
+        {{> sidebar}}
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container">
+                <h2 class="sub-header">Fixtures</h2>
+                <div class="jumbotron">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Home Team</th>
+                                    <th>Result</th>
+                                    <th>Away Team</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each fixtures}}
+                                <tr>
+                                    <td>{{dateHelper date}}</td>
+                                    <td><a href="{{teamLink _links.homeTeam.href}}" class=".fixture">{{homeTeamName}}</a></td>
+                                    <td>{{result.goalsHomeTeam}} - {{result.goalsAwayTeam}}</td>
+                                    <td><a href="{{teamLink _links.awayTeam.href}}" class=".fixture">{{awayTeamName}}</a></td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- /container -->
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>

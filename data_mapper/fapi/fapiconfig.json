@@ -1,0 +1,5 @@
+{
+  "host": "api.football-data.org",
+  "path": "/v1",
+  "headers": {"x-auth-token": "b333847006154fceab9250c4dc01f742"}
+}

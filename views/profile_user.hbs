@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - {{username}} Profile</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/profile.css" rel="stylesheet">
+</head>
+<body>
+    {{#if changes}}
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok"></span><strong> Changes saved</strong>
+        </div>
+    {{/if}}
+
+	<div class="container">
+		<div class="row profile">
+			<div class="col-md-3">
+				<div class="profile-sidebar">
+					<div class="profile-userpic">
+						<img src="{{avatar}}" width="50" height="50" class="img-responsive" alt="">
+					</div>
+					<div class="profile-usertitle">
+						<div class="profile-usertitle-name">
+							{{username}}
+						</div>
+					</div>
+					<div class="profile-usermenu">
+						<ul class="nav">
+							<li class="active">
+								<a href="{{profileLink}}">
+								<i class="glyphicon glyphicon-user"></i>
+								Overview </a>
+							</li>
+							<li>
+								<a href="{{profileSettingsLink}}">
+								<i class="glyphicon glyphicon-cog"></i>
+								Settings </a>
+							</li>
+							<li>
+								<a href="{{logout}}">
+								<i class="glyphicon glyphicon-off"></i>
+								Logout </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="profile-content">
+				   <h1>Profile {{username}}</h1>
+				   <hr/>
+				   <h3>Email: {{email}}</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <footer class="footer">
+        <div class="container">
+            <br/>
+            <a href="{{home}}">
+                <span><i class="glyphicon glyphicon-home"></i>
+                    Football Stats
+                </span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert-success').fadeOut();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

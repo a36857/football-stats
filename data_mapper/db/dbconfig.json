@@ -1,0 +1,8 @@
+{
+  "groups" : {
+    "database": "groups"
+  },
+  "users" : {
+    "database": "users"
+  }
+}

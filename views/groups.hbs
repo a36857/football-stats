@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - Groups</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/groups.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{home}}">
+                <i class="ion-ios-football"></i>
+                Football Stats
+            </a>
+        </div>
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{username}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{profileLink}}"><i class=""></i> Profile</a></li>
+                    <li><a href="{{profileSettingsLink}}"><i class=""></i> Settings</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{logout}}"><i class="glyphicon glyphicon-off"></i> Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="wrapper">
+        {{> sidebar}}
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container">
+                <h1>Favorites</h1>
+                <div class="jumbotron">
+                    <div class="row featurette">
+                        <div class="col-md-6 col-md-push-6">
+                            <form id="group-form" action="/groups" method="POST">
+                                <h2 class="form-signin-heading">New Group</h2>
+
+                                <label for="input-group" class="sr-only">Group Name</label>
+                                <input id="input-group" type="text" name="groupName" class="form-control" placeholder="Group Name" required autofocus>
+                                <br/>
+                                <button type="submit" id="submit-group" class="btn btn-default pull-right">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6 col-md-pull-6">
+                            <h2 class="form-signin-heading">Groups</h2>
+                            <ul id="groups" class="nav nav-pills nav-stacked">
+                                {{#each userGroups}}
+                                    <li><a href="{{groupDetailsLink _id}}" class="well well-small">{{name}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script src="/js/client/group-create.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>

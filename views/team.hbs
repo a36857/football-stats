@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - {{name}}</title>
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/team.css" rel="stylesheet">
+</head>
+<body>
+	{{> navbar}}
+
+    <div id="wrapper">
+	    {{> sidebar}}
+		
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+			<div class="container marketing">
+				<div class="jumbotron">
+					<div class="row featurette">
+						<div class="col-md-7 col-md-push-5">
+							<h2 class="featurette-heading">{{name}}</h2>
+							<h2 class="lead">Squad Market Value: {{squadMarketValue}}</h2>
+                            <h3><a href="{{playersLink self}}">Players</a></h3>
+                            <h3><a href="{{teamFixturesLink self}}">Fixtures</a></h3>
+						</div>
+						<div class="col-md-5 col-md-pull-7">
+							<img class="featurette-image img-responsive center-block" src="{{crestUrl}}">
+						</div>
+						<span>
+							<a class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
+								<span class="glyphicon glyphicon-star"></span>
+								Favorites 
+							</a>
+						</span>
+					</div>
+				</div><!-- /.jumbotron -->
+			</div><!-- /.container -->
+		</div>
+		
+		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body row">
+						<h2 class="text-center">Choose Group</h2>
+						<form method="POST" action="{{teamLink link}}">
+							<div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
+								{{#each userGroups}}
+										<button class="btn-lg btn-default round btn-block" name="groupID" value="{{_id}}" type="submit">{{name}}</button>
+								{{/each}}
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script>
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+		
+		$("#modal-toggle").click(function(e) {
+			e.preventDefault();
+			$("#modal").toggleClass("toggled");
+		});
+    </script>
+</body>
+</html>

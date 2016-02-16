@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats</title>
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/index.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    {{> navbar}}
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <a id="menu-toggle" class="btn btn-dark btn-sm toggle hidden"><i class="glyphicon glyphicon-menu-left"></i></a>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand" onclick=$("#menu-toggle").click();>Leagues</li>
+                {{#each leagues}}
+                    <li><a href="{{leagueLink _links.self.href}}" onclick=$("#menu-toggle").click();>{{caption}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+			<header id="top" class="header">
+                <div class="text-vertical-center">
+                    <h1>Welcome, {{username}}</h1>
+                    <h3>Let's start by choosing a league</h3>
+                    <br/>
+                    <button id="button-go" class="btn btn-dark btn-lg" onclick=$("#menu-toggle").click();>Go</button>
+                </div>
+			</header>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+			e.preventDefault();
+            $('#menu-toggle').fadeIn();
+            $('#menu-toggle').removeClass('hidden');
+			$("#wrapper").toggleClass("toggled");
+		});
+    </script>
+</body>
+</html>

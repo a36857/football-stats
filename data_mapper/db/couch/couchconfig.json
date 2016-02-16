@@ -1,0 +1,5 @@
+{
+  "hostname": "localhost",
+  "port": 5984,
+  "host": "football-stats-db.cloudant.com"
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="http://icons.iconarchive.com/icons/sportsbettingspot/summer-olympics/16/football-icon.png">
+    <title>Football Stats - {{leagueCaption}} Table</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+
+    <link href="/viewcss/league_table.css" rel="stylesheet">
+</head>
+<body>
+    {{> navbar}}
+
+    <div id="wrapper">
+        {{> sidebar}}
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container">
+                <h2 class="sub-header">{{leagueCaption}}</h2>
+                <div class="jumbotron">
+                    <div class="table-responsive">
+                        <table class="table table">
+                            <thead>
+								<tr>
+									<th>#</th>
+									<th/>
+									<th>TEAM</th>
+									<th>PTS</th>
+									<th>M</th>
+									<th>W</th>
+									<th>D</th>
+									<th>L</th>
+									<th>G</th>
+									<th>GA</th>
+									<th>GD</th>
+									<th>H-GH</th>
+									<th>H-GA</th>
+									<th>H-W</th>
+									<th>H-D</th>
+									<th>H-L</th>
+									<th>A-GH</th>
+									<th>A-GA</th>
+									<th>A-W</th>
+									<th>A-D</th>
+									<th>A-L</th>
+								</tr>
+                            </thead>
+                            <tbody>
+                            {{#each standing}}
+                                <tr>
+                                    <td>{{position}}</td>
+                                    <td><img width="20" height="20" src="{{crestURI}}"></td>
+                                    <td><a href="{{teamLink _links.team.href}}" class="team-href">{{teamName}}</a></td>
+                                    <td>{{points}}</td>
+                                    <td>{{playedGames}}</td>
+                                    <td>{{wins}}</td>
+                                    <td>{{draws}}</td>
+                                    <td>{{losses}}</td>
+                                    <td>{{goals}}</td>
+                                    <td>{{goalsAgainst}}</td>
+                                    <td>{{goalDifference}}</td>
+                                    <td>{{home.goals}}</td>
+                                    <td>{{home.goalsAgainst}}</td>
+                                    <td>{{home.wins}}</td>
+                                    <td>{{home.draws}}</td>
+                                    <td>{{home.losses}}</td>
+                                    <td>{{away.goals}}</td>
+                                    <td>{{away.goalsAgainst}}</td>
+                                    <td>{{away.wins}}</td>
+                                    <td>{{away.draws}}</td>
+                                    <td>{{away.losses}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
+    <script src="/js/customs/dropdown.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+</body>
+</html>
