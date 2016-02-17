@@ -1,11 +1,11 @@
 "use strict";
 
 $(document).ready(function() {
-   // var submitting = false; //cause some bug when user goes crazy on the submit button
+    var submitting = false; //cause some bug when user goes crazy on the submit button
 
     $('#group-form').submit(function(e) {
         e.preventDefault();
-        //if(!submitting) { submitting = true;
+        if(!submitting) { submitting = true;
 
             var input = $("#input-group").val();
             $('#loader').show();
@@ -17,14 +17,14 @@ $(document).ready(function() {
                 success: function (response) {
                     insertNewGroup(response, input);
                     $('#loader').hide();
-          //          submitting = false;
+                    submitting = false;
                 },
                 error: function () {
                     $('#loader').hide();
-            //        submitting = false;
+                    submitting = false;
                 }
             });
-        //}
+        }
         return false;
     });
 
