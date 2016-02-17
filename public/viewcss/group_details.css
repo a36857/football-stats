@@ -1,7 +1,7 @@
 body {
 	padding-top: 50px;
 	padding-bottom: 20px;
-	background: url("http://www.wallpaper-wallpaper.com/wp-content/uploads/images/football/football-soccer-wallpaper-retina-hd-download-3.jpg") no-repeat fixed;
+	background: url("/pictures/groups.jpg") no-repeat fixed;
 	background-size: cover;
 }
 
@@ -196,3 +196,26 @@ form{
 }
 
 .dropdown-menu{background:rgba(0,0,0,0.7);} /*to correct on dropdown slide up*/
+
+
+
+
+
+.loader {
+	border: 10px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 10px solid #3498db;
+	width: 50px;
+	height: 50px;
+	display: none;
+	-webkit-animation: spin 1s linear infinite;
+	animation: spin 1s linear infinite;
+}
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+	0% {  transform: rotate(0deg); }
+	100% {  transform: rotate(360deg); }
+}

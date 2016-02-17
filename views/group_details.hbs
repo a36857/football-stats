@@ -30,7 +30,7 @@
                                 <div class="container-fluid" id="t{{teamID}}">
                                     <form class="delete-team-form" method="" action="{{groupTeamLink teamID ../groupID}}">
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="team" value="t{{teamID}}">
+                                        <input type="hidden" name="team" value="{{teamID}}">
                                         <div class="form-inline">
                                             <button id="btn-delete-team" type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
                                             <span>{{teamName}}</span>
@@ -45,6 +45,7 @@
                                     </form>
                                     <br/>
                                 </div>
+                                <div id="l{{teamID}}" class="loader"></div>
                             {{/each}}
                         </div>
                         <div class="col-md-4 pull-right">

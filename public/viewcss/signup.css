@@ -1,14 +1,13 @@
 body {
-	background: url('https://usatsbi.files.wordpress.com/2010/08/6a00e54ef2975b8833013486310b64970c-pi.jpg') fixed;
-	background: url('http://www.wallpaperup.com/uploads/wallpapers/2014/04/17/336055/3ad6ded07223fc65b07372493ee313a8.jpg');
-  /* Set up proportionate scaling */
-  width: 100%;
-  height: 100%;
+	background: url('/pictures/old.jpg') fixed;
+  	width: 100%;
+ 	height: 100%;
 }
 
 
 h1,h2,h3,h4,h5,h6 {
 	color: #fff;
+	text-shadow: 2px 2px 5px #000;
 }
 
 
