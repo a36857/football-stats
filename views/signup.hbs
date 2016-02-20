@@ -46,16 +46,29 @@
                             </div>
                            <div class="form-group">
                                 <label for="InputPassword">Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" id="passwordID" name="password" placeholder="Password" required>
-                                    <span class="input-group-addon"></span>
+                                <div class="input-group" id="pass">
+                                    <input type="password" class="form-control"
+                                           id="passwordID" name="password" placeholder="Password"
+                                           onkeyup="verifyLength('pass',this.value)"
+                                           data-toggle="tooltip" title="at least 6 alphanumeric characteres" data-placement="bottom"
+                                           required>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-ok hidden ok"></i>
+                                        <i class="glyphicon glyphicon-remove hidden remove"></i>
+                                    </span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="InputPassword">Confirm Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" id="confirmPasswordID" name="confirmPassword" placeholder="Password" required>
-                                    <span class="input-group-addon"></span>
+                                <div class="input-group" id="passConfirm">
+                                    <input type="password" class="form-control"
+                                           id="confirmPasswordID" name="confirmPassword" placeholder="Password"
+                                           onkeyup="verifyLength('passConfirm',this.value)"
+                                           required>
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-ok hidden ok"></i>
+                                        <i class="glyphicon glyphicon-remove hidden remove"></i>
+                                    </span>
                                 </div>
                             </div>
                             {{#if error}}
@@ -87,6 +100,8 @@
     </div>
 
     <script src="/js/libs/jquery.js"></script>
+    <script src="/js/libs/bootstrap.min.js"></script>
     <script src="/js/client/validate-passwords.js"></script>
+    <script src="/js/client/tooltip.js"></script>
 </body>
 </html>
