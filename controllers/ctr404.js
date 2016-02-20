@@ -9,9 +9,11 @@ module.exports.handlerGet = function(req,rsp) {
 }
 
 module.exports.handler = function(err,req,rsp,next) {
+    /*
     if(err.status !== 404) {
         return next();
     }
+    */
     send(rsp);
 }
 

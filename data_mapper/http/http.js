@@ -37,7 +37,7 @@ module.exports.httpRequest = function (options, cb, body) {
 function verifyStatusCode(statusCode){
 	return status.contains(statusCode);
 }
-Array.prototype.contains = function ( item ) {
+Array.prototype.contains = function(item) {
 	for (var i in this) {
 		if (this[i] == item) return Number(this[i]);
 	}
