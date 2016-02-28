@@ -1,5 +1,5 @@
-const async = require('async');
-const e     = require('./../utils/handler-error');
+const async   = require('async');
+const onError = require('./../utils/handler-error').onErrorObj;
 
 const ml = require('./../models/modelLeague');
 const mg = require('./../models/modelGroup');
@@ -7,8 +7,8 @@ const mg = require('./../models/modelGroup');
 
 module.exports.get = function(user,cb) {
     var info = {
-        leagues : null,
-        userGroups: null
+        leagues    : null,
+        userGroups : null
     }
     var error = {
         error : null
@@ -17,13 +17,13 @@ module.exports.get = function(user,cb) {
     async.parallel([getLeagues,getUserGroups],end);
 
     function getLeagues(finish) {
-        ml.getAll(e.onErrorObj(error,finish,function(data) {
+        ml.getAll(onError(error,finish,function(data) {
             info.leagues = data;
             finish();
         }));
     }
     function getUserGroups(finish) {
-        mg.getAll(user,e.onErrorObj(error,finish,function(data) {
+        mg.getAll(user,onError(error,finish,function(data) {
             info.userGroups = data;
             finish();
         }));

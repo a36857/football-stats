@@ -4,8 +4,8 @@ var http = require('http');
 
 var status = ['400','401','403','404','408','414'];
 
-module.exports.httpRequest = function (options, cb, body) {
-	var req = http.request(options, onRequest)
+module.exports.httpRequest = function(options,cb,body) {
+	var req = http.request(options,onRequest);
 
 	if(body) req.write(body);
 

@@ -1,14 +1,14 @@
 "use strict";
 
-const domain = require('./../domain_logic/league-info');
-const e      = require('./../utils/handler-error');
+const domain  = require('./../domain_logic/league-info');
+const onError = require('./../utils/handler-error').onErrorNext;
 
 const view = 'league';
 
 module.exports.route = '/leagues/:id';
 
 module.exports.handler = function(req,rsp,next) {
-    domain.get(req.user.username,req.params.id,e.onErrorNext(next,function(info) {
+    domain.get(req.user.username,req.params.id,onError(next,function(info) {
         rsp.render(view, {
             username        : req.user.username,
             userGroups      : info.navInfo.userGroups,

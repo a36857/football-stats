@@ -1,11 +1,8 @@
 
-module.exports.onError = function(cb) {
+module.exports.onError = function(errcb,cb) {
     return function(err,result) {
-        err ? handlerError(err,cb) : cb(result);
+        err ? errcb(err,null) : cb(result);
     }
-}
-function handlerError(err,cb) {
-    cb(err,null);
 }
 
 

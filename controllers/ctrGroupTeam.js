@@ -1,6 +1,6 @@
-const domain = require('./../domain_logic/group-team-info');
-const model  = require('./../models/modelGroup');
-const e      = require('./../utils/handler-error');
+const domain  = require('./../domain_logic/group-team-info');
+const model   = require('./../models/modelGroup');
+const onError = require('./../utils/handler-error').onErrorNext;
 
 const view = 'group_team';
 
@@ -12,7 +12,7 @@ module.exports.handlerGet = function(req,rsp,next) {
         req.params.teamID,
         req.params.groupID,
         req.query.n,
-        e.onErrorNext(next,function(info) {
+        onError(next,function(info) {
              rsp.render(view,{
                 username    : req.user.username,
                 leagues     : info.navInfo.leagues,
@@ -29,7 +29,7 @@ module.exports.handlerGet = function(req,rsp,next) {
 
 
 module.exports.handlerDelete = function(req,rsp,next) {
-    model.deleteGroupTeam(req.params.teamID,req.params.groupID,e.onErrorNext(next,function(data) {
+    model.deleteGroupTeam(req.params.teamID,req.params.groupID,onError(next,function(data) {
         rsp.redirect(303, "/groups/" + req.params.groupID);
     }));
 }

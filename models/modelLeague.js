@@ -1,13 +1,14 @@
-const fapi = require('./../data_mapper/fapi/fapi');
+const fapi    = require('./../data_mapper/fapi/fapi');
+const onError = require('./../utils/handler-error').onError;
 
 var leagues;
 
 module.exports.getAll = function(cb) {
-    leagues ? cb(null,leagues) : fapi.getLeagues(caching);
+    leagues ? cb(null,leagues) : fapi.getLeagues(onError(cb,caching));
 
-    function caching(err,data) {
+    function caching(data) {
         leagues = data;
-        cb(err,data);
+        cb(null,data);
     }
 }
 

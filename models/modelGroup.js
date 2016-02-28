@@ -1,8 +1,8 @@
 "use strict";
 
-const mapper = require('./../data_mapper/db/groups_mapper/groups-mapper');
-const fapi   = require('./../data_mapper/fapi/fapi');
-const e      = require('./../utils/handler-error');
+const mapper  = require('./../data_mapper/db/groups_mapper/groups-mapper');
+const fapi    = require('./../data_mapper/fapi/fapi');
+const onError = require('./../utils/handler-error').onError;
 
 function Group(user, name, t) {
     this.user  = user;
@@ -11,7 +11,7 @@ function Group(user, name, t) {
 }
 
 module.exports.getAll = function(user,cb) {
-    mapper.getGroups(e.onError(function(groups) {
+    mapper.getGroups(onError(cb,function(groups) {
         groups = Object.keys(groups).map(function(k) { return groups[k] });
         cb(null,groups.filter((g)=>{ return g.user == user;}));
     }));
@@ -22,7 +22,7 @@ module.exports.get = function(id,cb){
 }
 
 module.exports.post = function(user,name,cb) {
-    exports.getAll(user,e.onError(function(groups) {
+    exports.getAll(user,onError(cb,function(groups) {
         var exists = false;
         for(let i=0; i<groups.length; i++) {
             if(groups[i].name == name){
@@ -34,7 +34,7 @@ module.exports.post = function(user,name,cb) {
 }
 
 module.exports.put = function(teamID,groupID,cb) {
-    fapi.getTeam(teamID,e.onError(function(data) {
+    fapi.getTeam(teamID,onError(cb,function(data) {
         var team = {
             teamID: teamID,
             teamName: data.name
@@ -48,7 +48,7 @@ module.exports.deleteGroup = function(id,cb) {
 }
 
 module.exports.deleteGroupTeam = function(teamID,groupID,cb) {
-    mapper.getGroupDetails(groupID,e.onError(function(group){
+    mapper.getGroupDetails(groupID,onError(cb,function(group){
         for(let i = 0; i < group.teams.length; ++i){
             if(group.teams[i].teamID === teamID)
                 group.teams.splice(i,1);

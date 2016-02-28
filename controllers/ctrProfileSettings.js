@@ -11,7 +11,7 @@ module.exports.handlerGet = function(req, rsp) {
 
 module.exports.handlerPut = function(req,rsp) {
     model.put(req.user.id,req.body.oldPassword,req.body.password,function(err,data) {
-        if(err){
+        if(err) {
             rsp.render(view,{
                 username    : req.user.username,
                 id          : req.user.id,

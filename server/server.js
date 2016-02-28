@@ -1,6 +1,6 @@
-const app = require('../app');
+const app   = require('../app');
 const debug = require('debug')('Football-APP:server');
-const http = require('http');
+const http  = require('http');
 
 const port = Number(process.env.PORT) || 3000;
 

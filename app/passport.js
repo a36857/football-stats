@@ -3,7 +3,8 @@ const gravatar = require('gravatar');
 const ctrIndex = require('./../controllers/ctrIndex');
 const ctrLogin = require('./../controllers/ctrLogin');
 
-const model = require('./../models/modelUser');
+const model   = require('./../models/modelUser');
+const onError = require('./../utils/handler-error').onError;
 
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -17,17 +18,17 @@ module.exports.config = function(passport) {
                 passwordField: 'password',
                 passReqToCallback: true
             },
-            function (req, username, password, done) {
+            function(req, username, password, done) {
                 return verifyCredentials(req,username,password,done);
             }
         )
     );
 
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser(function(user, done) {
         done(null, user);
     });
 
-    passport.deserializeUser(function (user, done) {
+    passport.deserializeUser(function(user, done) {
         done(null, user);
     });
 }
@@ -42,9 +43,8 @@ module.exports.authenticate = function(passport) {
 }
 
 function verifyCredentials(req, username, password, done) {
-    model.getAll(function(err, data) {
-        if(err) return done(err);
-        else {
+    model.getAll(onError(function(err){ return done(err); },
+        function(data) {
             for(var k in data) {
                 var user = data[k];
                 if(user.username != username)
@@ -59,6 +59,5 @@ function verifyCredentials(req, username, password, done) {
                     });
             }
             return done(null, false, req.flash('errormessage', 'User does not exist!'));
-        }
-    });
+        }));
 }

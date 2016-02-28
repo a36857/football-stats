@@ -1,5 +1,5 @@
-const model = require('./../models/modelUser');
-const e     = require('./../utils/handler-error');
+const model   = require('./../models/modelUser');
+const onError = require('./../utils/handler-error').onErrorNext;
 
 const view = 'profile_user';
 

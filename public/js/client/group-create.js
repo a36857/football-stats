@@ -5,7 +5,8 @@ $(document).ready(function() {
 
     $('#group-form').submit(function(e) {
         e.preventDefault();
-        if(!submitting) { submitting = true;
+        if(!submitting) {
+            submitting = true;
 
             var input = $("#input-group").val();
             $('#loader').show();
@@ -14,8 +15,8 @@ $(document).ready(function() {
                 url: $(this).attr('action'),
                 type: $(this).attr('method'),
                 data: $(this).serialize(),
-                success: function (response) {
-                    insertNewGroup(response, input);
+                success: function(response) {
+                    insertNewGroup(response,input);
                     $('#loader').hide();
                     submitting = false;
                 },

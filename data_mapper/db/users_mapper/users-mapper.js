@@ -1,6 +1,6 @@
-const db     = require('./../couch/couch');
-const config = require("./../dbconfig.json").users;
-const e      = require('./../../../utils/handler-error');
+const db      = require('./../couch/couch');
+const config  = require("./../dbconfig.json").users;
+const onError = require('./../../../utils/handler-error').onError;
 
 const dbname = config.database;
 const dbpath = "/" + dbname + "/";
@@ -14,7 +14,7 @@ module.exports.post = function(user,cb) {
 module.exports.get = function(id,cb) {
     if(users[id]) cb(null,users[id]);
     else {
-        db.readDoc(dbpath,id,e.onError(function(user) {
+        db.readDoc(dbpath,id,onError(cb,function(user) {
             users[id] = user;
             cb(null,user);
         }));
@@ -26,7 +26,7 @@ module.exports.getAll = function(cb) {
 }
 
 module.exports.put = function(id,user,cb) {
-    db.updateDoc(dbpath,user,e.onError(function(data){
+    db.updateDoc(dbpath,user,onError(cb,function(data){
         users[id] = user;
         cb(null,data);
     }));

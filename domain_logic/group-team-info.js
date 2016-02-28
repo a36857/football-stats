@@ -1,7 +1,7 @@
 "use strict";
 
-const async = require('async');
-const e     = require('./../utils/handler-error');
+const async   = require('async');
+const onError = require('./../utils/handler-error').onErrorObj;
 
 const nav = require('./navbar-info');
 const mf  = require('./../models/modelTeamFixtures');
@@ -24,19 +24,19 @@ module.exports.get = function(user,idTeam,idGroup,n,cb) {
     async.parallel([getNavbarInfo,getTeamFixtures,getGroup],end);
 
     function getNavbarInfo(finish) {
-        nav.get(user,e.onErrorObj(error,finish,function(data) {
+        nav.get(user,onError(error,finish,function(data) {
             info.navInfo = data;
             finish();
         }));
     }
     function getTeamFixtures(finish) {
-        mf.get(idTeam,e.onErrorObj(error,finish,function(data) {
+        mf.get(idTeam,onError(error,finish,function(data) {
             info.fix = data;
             finish();
         }));
     }
     function getGroup(finish) {
-        mg.get(idGroup,e.onErrorObj(error,finish,function(data) {
+        mg.get(idGroup,onError(error,finish,function(data) {
             info.group = data;
             finish();
         }));

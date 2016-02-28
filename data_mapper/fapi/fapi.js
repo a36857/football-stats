@@ -1,6 +1,6 @@
 "use strict";
 
-const http = require('./../http/http');
+const http   = require('./../http/http');
 const config = require('./fapiconfig.json');
 
 function Options() {

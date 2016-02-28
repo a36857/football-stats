@@ -1,8 +1,10 @@
 "use strict";
 
-const http = require('./../../http/http');
+const http    = require('./../../http/http');
+const config  = require('./couchconfig.json');
+const onError = require('./../../../utils/handler-error').onError;
+
 const async = require('async');
-const config = require('./couchconfig.json');
 
 var docs = {}
 
@@ -10,7 +12,7 @@ function clearDocs() {
     docs = {};
 }
 
-function Options(path, m) {
+function Options(path,m) {
     /*this.host   = config.hostname;
     this.port   = config.port;*/
     this.host   = config.host;
@@ -28,16 +30,13 @@ module.exports.readAllDocs = function(path,cb) {
     clearDocs();
     var opt = new Options(path + "_all_docs",'GET');
     var operations = []; //tasks to async.parallel
-    http.httpRequest(opt, onRequestDone);
+    http.httpRequest(opt,onError(cb,onRequestDone));
 
-    function onRequestDone(err,result) {
-        if(err) cb(err,null);
-        else {
-            result.rows.forEach((doc) => {
-                operations.push((finish) => exports.readDoc(path,doc.id,finish));
-            });
-            async.parallel(operations,onAsync); //do all tasks & wait for all to run cb
-        }
+    function onRequestDone(result) {
+        result.rows.forEach((doc) => {
+            operations.push((finish) => exports.readDoc(path,doc.id,finish));
+        });
+        async.parallel(operations,onAsync); //do all tasks & wait for all to run cb
     }
 
     function onAsync() {
@@ -47,11 +46,11 @@ module.exports.readAllDocs = function(path,cb) {
 
 module.exports.readDoc = function(path,id,cb) {
     var opt = new Options(path + id,'GET');
-    http.httpRequest(opt, onRequestDone);
+    http.httpRequest(opt,onError(cb,onRequestDone));
 
-    function onRequestDone(err,doc) {
+    function onRequestDone(doc) {
         docs[doc._id] = doc;
-        cb(err,doc);
+        cb(null,doc);
     }
 }
 
