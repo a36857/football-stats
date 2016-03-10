@@ -1,7 +1,9 @@
 "use strict";
 
-const async   = require('async');
-const onError = require('./../utils/handler-error').onErrorObj;
+const async         = require('async');
+const onErrorAsync  = require('./../utils/handler-error').onErrorObj;
+const onError       = require('./../utils/handler-error').onError;
+
 
 const nav = require('./navbar-info');
 const mf  = require('./../models/modelTeamFixtures');
@@ -11,7 +13,6 @@ const mg  = require('./../models/modelGroup');
 module.exports.get = function(user,idTeam,idGroup,n,cb) {
     var info = {
         navInfo   : null,
-        fix       : null,
         lastGames : null,
         nextGames : null,
         group     : null,
@@ -21,59 +22,60 @@ module.exports.get = function(user,idTeam,idGroup,n,cb) {
         error : null
     }
 
-    async.parallel([getNavbarInfo,getTeamFixtures,getGroup],end);
+    async.parallel([getNavbarInfo,getGroup],end);
 
     function getNavbarInfo(finish) {
-        nav.get(user,onError(error,finish,function(data) {
+        nav.get(user,onErrorAsync(error,finish,function(data) {
             info.navInfo = data;
             finish();
         }));
     }
-    function getTeamFixtures(finish) {
-        mf.get(idTeam,onError(error,finish,function(data) {
-            info.fix = data;
-            finish();
-        }));
-    }
     function getGroup(finish) {
-        mg.get(idGroup,onError(error,finish,function(data) {
+        mg.get(idGroup,onErrorAsync(error,finish,function(data) {
             info.group = data;
             finish();
         }));
     }
 
     function end() {
-        if(error.error){ cb(error.error,null);}
-        else {
-            var lastGames=[], nextGames=[];
-            var N = n;
-            var i= 0, j=0;
-            info.fix.fixtures.forEach((fix) => {
-                if(j==N){ return;}
-                if(fix.status!="FINISHED"){
-                    nextGames[j++] = fix;
-                }
-            });
-
-            info.fix.fixtures.reverse().forEach((fix) => {
-                if(i==N){ return;}
-                if(fix.status=="FINISHED"){
-                    lastGames[i++] = fix;
-                }
-            });
-
-            var teamName;
-            info.group.teams.forEach((t)=> {
-                if(t.teamID==idTeam){
-                    teamName = t.teamName;
-                }
-            });
-
-            info.team = teamName;
-            info.lastGames = lastGames;
-            info.nextGames = nextGames;
-
-            cb(null,info);
-        }
+        error.error ? cb(error.error, null) : getTeam();
     }
+
+    function getTeam() {
+        info.group.teams.forEach((t)=> {
+            if(t.teamID == idTeam) {
+                info.team = t.teamName;
+            }
+        });
+
+        info.team ? getTeamFixtures(idTeam,cb,proccessFixtures) : cb(404,null);
+    }
+
+    function proccessFixtures(fix) {
+        var lastGames=[], nextGames=[];
+        var N = n;
+        var i= 0, j=0;
+        fix.fixtures.forEach((fix) => {
+            if(j==N){ return;}
+            if(fix.status!="FINISHED"){
+                nextGames[j++] = fix;
+            }
+        });
+
+        fix.fixtures.reverse().forEach((fix) => {
+            if(i==N){ return;}
+            if(fix.status=="FINISHED"){
+                lastGames[i++] = fix;
+            }
+        });
+
+        info.lastGames = lastGames;
+        info.nextGames = nextGames;
+
+        cb(null,info);
+    }
+}
+
+function getTeamFixtures(id,error,cb) {
+    mf.get(id,onError(error,cb));
 }
