@@ -1,4 +1,5 @@
 "use strict";
+const gravatar = require('gravatar');
 
 const mapper  = require('./../data_mapper/db/users_mapper/users-mapper');
 const onError = require('./../utils/handler-error').onError;
@@ -6,8 +7,9 @@ const onError = require('./../utils/handler-error').onError;
 
 function User(username, email, password) {
     this.username = username;
-    this.email = email;
+    this.email    = email;
     this.password = password;
+    this.avatar   = gravatar.url(email,{d:'http://www.readingfc.co.uk/images/common/bg_player_profile_default_big.png'});
 }
 
 module.exports.post = function(username,email,password,cb) {
@@ -38,7 +40,7 @@ module.exports.put = function(id,oldPassword,newPassword,cb) {
             mapper.put(id,user,cb);
         }
         else {
-            cb(true,null);
+            cb(true,user);
         }
     }));
 }

@@ -52,10 +52,9 @@ function verifyCredentials(req, username, password, done) {
                 else if(user.password != password)
                     return done(null, false, req.flash('errormessage', 'Password invalid!'));
                 else
-                    return done(null, {username: username,
-                        id: user._id,
-                        email: user.email,
-                        avatar: gravatar.url(user.email,{d:'http://www.readingfc.co.uk/images/common/bg_player_profile_default_big.png'})
+                    return done(null, {
+                        username: username,
+                        id: user._id
                     });
             }
             return done(null, false, req.flash('errormessage', 'User does not exist!'));

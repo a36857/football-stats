@@ -14,7 +14,7 @@ module.exports.getLeagues = function(cb) {
 }
 
 module.exports.getTeams = function(id,cb) {
-    doRequest('/soccerseasons/' +id + "/teams",cb);
+    doRequest('/soccerseasons/' + id + "/teams",cb);
 }
 
 module.exports.getLeague = function(id,cb) {

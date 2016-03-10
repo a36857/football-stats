@@ -28,7 +28,7 @@ module.exports.handler = function(req,rsp,next) {
                                             .top(info.league.numberOfTeams / 2),
 
             standing :
-                info.leagueTable.standing
+                info.leagueTable ? info.leagueTable.standing : undefined
         });
     }));
 }

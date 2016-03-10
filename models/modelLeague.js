@@ -1,3 +1,5 @@
+"use strict";
+
 const fapi    = require('./../data_mapper/fapi/fapi');
 const onError = require('./../utils/handler-error').onError;
 
@@ -13,5 +15,16 @@ module.exports.getAll = function(cb) {
 }
 
 module.exports.get = function(id,cb) {
-    fapi.getLeague(id,cb);
+    leagues ? getLeagueFromCache() : fapi.getLeague(id,cb);
+
+    function getLeagueFromCache() {
+        for (let i = 0; i < leagues.length; ++i) {
+            let league = leagues[i];
+            if(id == league.id) {
+                cb(null,league);
+                return;
+            }
+        }
+        cb(true,null);
+    }
 }

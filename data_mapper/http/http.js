@@ -34,7 +34,7 @@ module.exports.httpRequest = function(options,cb,body) {
 	}
 }
 
-function verifyStatusCode(statusCode){
+function verifyStatusCode(statusCode) {
 	return status.contains(statusCode);
 }
 Array.prototype.contains = function(item) {

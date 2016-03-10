@@ -38,10 +38,13 @@ module.exports.get = function(user,id,cb) {
         }));
     }
     function getLeagueTable(finish) {
-        mt.get(id,onError(error,finish,function(data){
-            info.leagueTable = data;
-            finish();
-        }));
+        mt.get(id,function(err,data) {
+            if(err) finish();
+            else {
+                info.leagueTable = data;
+                finish();
+            }
+        });
     }
 
     function end(){
