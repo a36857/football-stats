@@ -30,6 +30,7 @@ module.exports.handlerGet = function(req,rsp,next) {
 
 module.exports.handlerDelete = function(req,rsp,next) {
     model.deleteGroupTeam(req.params.teamID,req.params.groupID,onError(next,function(data) {
-        rsp.redirect(303, "/groups/" + req.params.groupID);
+        rsp.status(200);
+        rsp.send();
     }));
 }

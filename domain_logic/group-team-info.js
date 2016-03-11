@@ -12,44 +12,49 @@ const mg  = require('./../models/modelGroup');
 
 module.exports.get = function(user,idTeam,idGroup,n,cb) {
     var info = {
-        navInfo   : null,
-        lastGames : null,
-        nextGames : null,
-        group     : null,
-        team      : null
+        navInfo: null,
+        lastGames: null,
+        nextGames: null,
+        group: null,
+        team: null
     }
     var error = {
-        error : null
+        error: null
     }
 
-    async.parallel([getNavbarInfo,getGroup],end);
+    async.parallel([getNavbarInfo, getGroup], end);
 
     function getNavbarInfo(finish) {
-        nav.get(user,onErrorAsync(error,finish,function(data) {
+        nav.get(user, onErrorAsync(error, finish, function (data) {
             info.navInfo = data;
             finish();
         }));
     }
+
     function getGroup(finish) {
-        mg.get(idGroup,onErrorAsync(error,finish,function(data) {
+        mg.get(idGroup, onErrorAsync(error, finish, function (data) {
             info.group = data;
             finish();
         }));
     }
 
     function end() {
-        error.error ? cb(error.error, null) : getTeam();
+        error.error ? cb(error.error, null) : getTeam(idTeam,info,n,cb);
     }
+}
 
-    function getTeam() {
-        info.group.teams.forEach((t)=> {
-            if(t.teamID == idTeam) {
-                info.team = t.teamName;
-            }
-        });
+/***
+ * Callbacks to run after End Callback on Async
+ ****/
+function getTeam(idTeam,info,n,cb) {
+    info.group.teams.forEach((t)=> {
+        if(t.teamID == idTeam) {
+            info.team = t.teamName;
+        }
+    });
 
-        info.team ? getTeamFixtures(idTeam,cb,proccessFixtures) : cb(404,null);
-    }
+    info.team ? getTeamFixtures(idTeam,cb,proccessFixtures) : cb(404,null);
+
 
     function proccessFixtures(fix) {
         var lastGames=[], nextGames=[];

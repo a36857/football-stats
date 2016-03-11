@@ -25,6 +25,6 @@ module.exports.handlerPost = function(req,rsp,next) {
             req.body.groupName,
             function(err,data) {
                 if(err){ rsp.status(404); rsp.send();}
-                else rsp.send(data.id);
+                else{ rsp.set('Content-Type','text/plain'); rsp.send(data.id); }
     });
 }
