@@ -49,6 +49,7 @@ app.use(flash());
 configPass.config(passport);
 
 // always before the authorization middleware
+
 // public routes config
 app.route(ctrLogin.route)
     .get(ctrLogin.handler)

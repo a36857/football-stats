@@ -53,10 +53,10 @@ function getTeam(idTeam,info,n,cb) {
         }
     });
 
-    info.team ? getTeamFixtures(idTeam,cb,proccessFixtures) : cb(404,null);
+    info.team ? getTeamFixtures(idTeam,cb,processFixtures) : cb(404,null);
 
 
-    function proccessFixtures(fix) {
+    function processFixtures(fix) {
         var lastGames=[], nextGames=[];
         var N = n;
         var i= 0, j=0;
