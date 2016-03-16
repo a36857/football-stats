@@ -19,21 +19,23 @@ var app = express.Router();
 
 app.get(ctrIndex.route,ctrIndex.handler);
 
+
 app.get(ctrLeague.route,ctrLeague.handler);
 app.get(ctrLeagueFixtures.route,ctrLeagueFixtures.handler);
 app.get(ctrLeagueTable.route,ctrLeagueTable.handler);
 
-app.route(ctrTeam.route)
-        .get(ctrTeam.handler)
-        .post(ctrTeam.handlerPost);
+app.get(ctrTeam.route,ctrTeam.handler);
 app.get(ctrTeamFixtures.route,ctrTeamFixtures.handler);
 app.get(ctrTeamPlayers.route,ctrTeamPlayers.handler);
+
 
 app.route(ctrGroups.route)
         .get(ctrGroups.handlerGet)
         .post(ctrGroups.handlerPost);
+
 app.route(ctrGD.route)
         .get(ctrGD.handlerGet)
+        .post(ctrGD.handlerPost)
         .delete(ctrGD.handlerDelete);
 
 app.route(ctrGroupTeam.route)

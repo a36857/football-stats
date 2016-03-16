@@ -50,6 +50,10 @@ module.exports.registerHelpers = function () {
         return "/teams/" + getID(link,"/teams/");
     });
 
+    handlebars.registerHelper('getTeamID', function(link) {
+        return getID(link,"/teams/");
+    });
+
     handlebars.registerHelper('playersLink', function (link) {
         return "/teams/" + getID(link,"/teams/") + "/players";
     });

@@ -179,13 +179,13 @@ body {
 	background: rgba(0,0,0,0.8);
 }
 .jumbotron h2 {
-   color: white;
+    color: white;
 }
 
 .featurette-heading {
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -1px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
 }
 
 .featurette-image {
@@ -203,5 +203,8 @@ body {
 	background-color: rgba(0,0,0,0.7);
 }
 .round {
-  border-radius: 20px;
+    border-radius: 20px;
+}
+#myModal button{
+    margin: 3px;
 }

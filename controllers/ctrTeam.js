@@ -1,5 +1,4 @@
 const domain  = require('./../domain_logic/team-info');
-const model   = require('./../models/modelGroup');
 const onError = require('./../utils/handler-error').onErrorNext;
 
 const view = 'team';
@@ -21,11 +20,5 @@ module.exports.handler = function (req,rsp,next) {
             crestUrl        : info.team.crestUrl,
             link            : info.team._links.self.href
         });
-    }));
-}
-
-module.exports.handlerPost = function(req,rsp,next) {
-    model.put(req.params.id,req.body.groupID,onError(next,function(data){
-        rsp.redirect(303,"/groups/" + req.body.groupID);
     }));
 }

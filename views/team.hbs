@@ -49,13 +49,13 @@
 				<div class="modal-content">
 					<div class="modal-body row">
 						<h2 class="text-center">Choose Group</h2>
-						<form method="POST" action="{{teamLink link}}">
-							<div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
-								{{#each userGroups}}
-										<button class="btn-lg btn-default round btn-block" name="groupID" value="{{_id}}" type="submit">{{name}}</button>
-								{{/each}}
-							</div>
-						</form>
+                        <div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0">
+                            {{#each userGroups}}
+                                <form method="POST" action="{{groupDetailsLink _id}}">
+                                    <button class="btn-lg btn-default round btn-block" name="teamID" value="{{getTeamID ../self}}" type="submit">{{name}}</button>
+                                </form>
+                            {{/each}}
+                        </div>
 					</div>
 				</div>
 			</div>

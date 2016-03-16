@@ -33,7 +33,7 @@ module.exports.post = function(user,name,cb) {
     }))
 }
 
-module.exports.put = function(teamID,groupID,cb) {
+module.exports.put = function(groupID,teamID,cb) {
     fapi.getTeam(teamID,onError(cb,function(data) {
         var team = {
             teamID: teamID,
